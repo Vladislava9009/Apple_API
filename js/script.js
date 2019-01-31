@@ -5,7 +5,7 @@ var server = 'https://itunes.apple.com/';
 
 (function appleApi(options = {}){
     var defaults = {
-        name: 'Harry+Potter',
+        name: 'Harry+Potter', //по умолчанию стояит гарри поттер, но можно поставить "самый популярные запросы" например
         limit:'9'
         
     };
@@ -23,7 +23,7 @@ var server = 'https://itunes.apple.com/';
         appleApi(options)
         });
 
-    var request = $.ajax(`${server}/search?entity=movie&term=${options.name}&limit=${options.limit}`);//&limit=3
+    var request = $.ajax(`${server}/search?entity=movie&term=${options.name}&limit=${options.limit}`);//лимит можно выставить пользовательски
 
 
     request.done(response=>{
@@ -70,8 +70,10 @@ var server = 'https://itunes.apple.com/';
                         
             });
             $('.item:first-child').addClass('active')
-            $('.carousel-indicatirs:first-child').addClass('active')
+            $('.carousel-indicators:first-child').addClass('active')
        
+        }).fail(error=>{
+            alert(error.responseJSON.error.message);
         });
 
 })();
